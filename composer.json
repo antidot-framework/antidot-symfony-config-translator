@@ -1,0 +1,55 @@
+{
+    "name": "antidot/symfony-config-translator",
+    "description": "Anti.Framework Symfony config translator library",
+    "keywords": [
+        "psr-3",
+        "psr-11",
+        "psr-15"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kpicaza",
+            "email": "kpicaza.sound@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2.13",
+        "zendframework/zend-config": "^3.2.*"
+    },
+    "require-dev": {
+        "phpro/grumphp": "^0.15.0",
+        "phpstan/phpstan": "^0.11.5",
+        "phpunit/phpunit": "^8.0",
+        "squizlabs/php_codesniffer": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Antidot\\SymfonyConfigTranslator\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AntidotTest\\SymfonyConfigTranslator\\": "test"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@inspect"
+        ],
+        "cs-check": "phpcs src --colors",
+        "cs-fix": "phpcbf src --colors",
+        "inspect": "phpstan analyse src -l7 --ansi",
+        "test": "phpunit --colors=always"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "zf": {
+            "config-provider": "Antidot\\Logger\\Container\\Config\\ConfigProvider"
+        }
+    }
+}

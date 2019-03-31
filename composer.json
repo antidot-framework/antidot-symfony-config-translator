@@ -7,7 +7,7 @@
         "psr-15"
     ],
     "type": "library",
-    "license": "MIT",
+    "license": "BSD-2.0",
     "authors": [
         {
             "name": "kpicaza",
@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^7.2.13",
-        "zendframework/zend-config": "^3.2.*"
+        "zendframework/zend-config": "^3.2.0"
     },
     "require-dev": {
         "phpro/grumphp": "^0.15.0",
@@ -51,5 +51,9 @@
         "zf": {
             "config-provider": "Antidot\\Logger\\Container\\Config\\ConfigProvider"
         }
+    },
+    "suggest": {
+        "ext-yaml": "if your config is in yaml format.",
+        "ext-xml": "if your config is in xml format."
     }
 }

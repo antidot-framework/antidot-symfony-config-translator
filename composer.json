@@ -1,5 +1,5 @@
 {
-    "name": "antidot/symfony-config-translator",
+    "name": "antidot-fw/symfony-config-translator",
     "description": "Anti.Framework Symfony config translator library",
     "keywords": [
         "psr-3",
@@ -7,11 +7,10 @@
         "psr-15"
     ],
     "type": "library",
-    "license": "BSD-2.0",
+    "license": "BSD-2-Clause",
     "authors": [
         {
-            "name": "kpicaza",
-            "email": "kpicaza.sound@gmail.com"
+            "name": "kpicaza"
         }
     ],
     "require": {
@@ -35,8 +34,9 @@
         }
     },
     "scripts": {
-        "check": [
+        "check-all": [
             "@cs-check",
+            "@test",
             "@inspect"
         ],
         "cs-check": "phpcs src --colors",

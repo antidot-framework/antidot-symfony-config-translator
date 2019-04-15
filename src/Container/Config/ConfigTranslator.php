@@ -9,6 +9,7 @@ use DateTimeImmutable;
 use function array_key_exists;
 use function array_merge_recursive;
 use function array_search;
+use function count;
 use function json_decode;
 use function json_encode;
 use function str_replace;
@@ -66,7 +67,11 @@ class ConfigTranslator
             }
 
             if (array_key_exists('factory', $service)) {
-                $config['dependencies']['factories'][$serviceName] = $service['factory'][0];
+//                dump($service['factory']);
+
+                $config['dependencies']['factories'][$serviceName] = count($service['factory']) > 1
+                    ? $service['factory']
+                    : $service['factory'][0];
                 continue;
             }
 

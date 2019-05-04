@@ -15,8 +15,7 @@ composer require antidot-fw/symfony-config-translator:dev-master
 
 declare(strict_types=1);
 
-use Antidot\SymfonyConfigTranslator\Container\Config\ConfigTranslator;
-use Zend\ConfigAggregator\ConfigAggregator;
+use Antidot\SymfonyConfigTranslator\Container\Config\ConfigAggregator;
 use Zend\ConfigAggregator\PhpFileProvider;
 use Zend\ConfigAggregator\ZendConfigProvider;
 
@@ -32,7 +31,7 @@ $aggregator = new ConfigAggregator([
     new ZendConfigProvider(realpath(__DIR__).'/services/{{,*.}prod,{,*.}local,{,*.}dev}.yaml'),
 ], $cacheConfig['config_cache_path']);
 
-return (new ConfigTranslator())($aggregator->getMergedConfig());
+return $aggregator->getMergedConfig();
 ````
 
 ### Zend expressive

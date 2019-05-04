@@ -45,7 +45,7 @@ EOT;
                 return;
             }
             parent::__construct($providers);
-            $this->checkCacheConfig($providers, $cachedConfigFile);
+            $this->checkCacheConfig($cachedConfigFile);
         } else {
             parent::__construct($providers, $cachedConfigFile, $postProcessors);
             $this->config = $this->mergeConfig(parent::getMergedConfig());
@@ -57,7 +57,7 @@ EOT;
         return $this->config;
     }
 
-    private function checkCacheConfig(array $providers, string $cachedConfigFile): void
+    private function checkCacheConfig(string $cachedConfigFile): void
     {
         $this->config = $this->mergeConfig(parent::getMergedConfig());
 

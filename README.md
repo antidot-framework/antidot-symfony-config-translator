@@ -15,4 +15,4 @@ composer require antidot-fw/symfony-config-translator:dev-master
 
 ## Documentation
 
-See full config options in the [docs]().
+See full config options in the [docs](https://sf-config.antidotfw.io/).

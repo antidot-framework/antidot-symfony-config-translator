@@ -7,7 +7,7 @@ namespace Antidot\SymfonyConfigTranslator;
 use function str_replace;
 use function strpos;
 
-class ParseArguments
+class ArgumentTranslator
 {
     public function process(array $config, array $service): array
     {

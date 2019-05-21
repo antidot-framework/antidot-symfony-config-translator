@@ -8,7 +8,9 @@ use Antidot\SymfonyConfigTranslator\AliasTranslator;
 use Antidot\SymfonyConfigTranslator\ConditionalTranslator;
 use Antidot\SymfonyConfigTranslator\FactoryTranslator;
 use Antidot\SymfonyConfigTranslator\InvokableTranslator;
+use Antidot\SymfonyConfigTranslator\TagTranslator;
 use DateTimeImmutable;
+use RuntimeException;
 use Zend\ConfigAggregator\ConfigAggregator as BaseAggregator;
 
 use function array_replace_recursive;
@@ -70,6 +72,7 @@ EOT;
     private function parse(array $defaultConfig): array
     {
         $config = array_replace_recursive(
+            (new TagTranslator())->process($defaultConfig['services']),
             (new FactoryTranslator())->process($defaultConfig),
             (new ConditionalTranslator())->process($defaultConfig),
             (new AliasTranslator())->process($defaultConfig['services']),
@@ -78,9 +81,8 @@ EOT;
         );
 
         if (empty($config)) {
-            throw new \RuntimeException('Error occurred merging configuration');
+            throw new RuntimeException('Error occurred merging configuration');
         }
-
         return $config;
     }
 

@@ -25,7 +25,7 @@ class FactoryTranslator
                     $factories[$serviceName] = [
                         $service['factory'],
                         '__invoke',
-                        (new ParseArguments())->process(
+                        (new ArgumentTranslator())->process(
                             $symfonyFactory,
                             $service
                         ),
@@ -39,7 +39,7 @@ class FactoryTranslator
                     $factories[$serviceName] = [
                         $factory,
                         $method,
-                        (new ParseArguments())->process(
+                        (new ArgumentTranslator())->process(
                             $symfonyFactory,
                             $service
                         ),

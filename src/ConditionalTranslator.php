@@ -22,7 +22,7 @@ class ConditionalTranslator
             }
 
             if (array_key_exists('arguments', $service)) {
-                $arguments = (new ParseArguments())->process($symfonyService, $service);
+                $arguments = (new ArgumentTranslator())->process($symfonyService, $service);
                 $conditionals[$name] = [
                     'class' => $service['class'] ?? $name,
                     'arguments' => $arguments,

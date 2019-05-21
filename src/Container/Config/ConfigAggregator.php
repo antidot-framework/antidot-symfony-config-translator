@@ -69,13 +69,19 @@ EOT;
 
     private function parse(array $defaultConfig): array
     {
-        return array_replace_recursive(
+        $config = array_replace_recursive(
             (new FactoryTranslator())->process($defaultConfig),
             (new ConditionalTranslator())->process($defaultConfig),
             (new AliasTranslator())->process($defaultConfig['services']),
             (new InvokableTranslator())->process($defaultConfig['services']),
             $defaultConfig
         );
+
+        if (empty($config)) {
+            throw new \RuntimeException('Error occurred merging configuration');
+        }
+
+        return $config;
     }
 
     private function cacheConfig(array $config, string $cachedConfigFile): void

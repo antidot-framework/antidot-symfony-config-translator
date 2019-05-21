@@ -11,7 +11,7 @@ use Antidot\SymfonyConfigTranslator\InvokableTranslator;
 use DateTimeImmutable;
 use Zend\ConfigAggregator\ConfigAggregator as BaseAggregator;
 
-use function array_merge_recursive;
+use function array_replace_recursive;
 use function date;
 use function file_exists;
 use function file_put_contents;
@@ -69,7 +69,7 @@ EOT;
 
     private function parse(array $defaultConfig): array
     {
-        return array_merge_recursive(
+        return array_replace_recursive(
             (new FactoryTranslator())->process($defaultConfig),
             (new ConditionalTranslator())->process($defaultConfig),
             (new AliasTranslator())->process($defaultConfig['services']),
@@ -80,12 +80,14 @@ EOT;
 
     private function cacheConfig(array $config, string $cachedConfigFile): void
     {
-        file_put_contents($cachedConfigFile, sprintf(
-            self::CACHE_TEMPLATE,
-            get_class($this),
-            date('c'),
-            var_export($config, true)
-        ));
+        if (true === $config['config_cache_enabled']) {
+            file_put_contents($cachedConfigFile, sprintf(
+                self::CACHE_TEMPLATE,
+                get_class($this),
+                date('c'),
+                var_export($config, true)
+            ));
+        }
     }
 
     private function mergeConfig(array $config): array

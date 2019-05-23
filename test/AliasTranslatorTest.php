@@ -16,6 +16,13 @@ class AliasTranslatorTest extends TestCase
     /** @var array */
     private $obtainedAlias;
 
+    public function testItShouldReturnEmptyAliasesWhenTheyAreNotDefined(): void
+    {
+        $this->givenASymfonyStyleConfigWithoutAliases();
+        $this->whenTheAliasIsProcessed();
+        $this->thenGivenSymfonyStyleServiceShouldNotBeModified();
+    }
+
     public function testItShouldTranslateAnAliasTypeDependencies(): void
     {
         $this->givenASymfonyStyleAlias();
@@ -64,5 +71,21 @@ class AliasTranslatorTest extends TestCase
     private function andThenGivenSymfonyStyleAliasShouldBeEmpty(): void
     {
         $this->assertEmpty($this->symfonyAlias);
+    }
+
+    private function givenASymfonyStyleConfigWithoutAliases(): void
+    {
+        $this->symfonyAlias = [
+            'services' => null
+        ];
+    }
+
+    private function thenGivenSymfonyStyleServiceShouldNotBeModified(): void
+    {
+        $this->assertEquals([
+            'dependencies' => [
+                'aliases' => []
+            ]
+        ], $this->obtainedAlias);
     }
 }

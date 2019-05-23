@@ -21,45 +21,13 @@ class FactoryTranslator
                 continue;
             }
             if (array_key_exists('factory', $service) && array_key_exists('arguments', $service)) {
-                if (is_string($service['factory'])) {
-                    $factories[$serviceName] = [
-                        $service['factory'],
-                        '__invoke',
-                        (new ArgumentTranslator())->process(
-                            $symfonyFactory,
-                            $service
-                        ),
-                    ];
-                    unset($symfonyFactory['services'][$serviceName]);
-                    continue;
-                }
-                if (is_array($service['factory'])) {
-                    $factory = array_shift($service['factory']);
-                    $method = array_shift($service['factory']);
-                    $factories[$serviceName] = [
-                        $factory,
-                        $method,
-                        (new ArgumentTranslator())->process(
-                            $symfonyFactory,
-                            $service
-                        ),
-                    ];
-                    unset($symfonyFactory['services'][$serviceName]);
-                    continue;
-                }
+                $factories[$serviceName] = $this->getFactoryWithArguments($symfonyFactory, $serviceName, $service);
+                continue;
             }
             if (array_key_exists('factory', $service)) {
-                if (is_string($service['factory'])) {
-                    $factories[$serviceName] = $service['factory'];
-                    unset($symfonyFactory['services'][$serviceName]);
-                    continue;
-                }
-
-                if (is_array($service['factory'])) {
-                    $factories[$serviceName] = $service['factory'];
-                    unset($symfonyFactory['services'][$serviceName]);
-                    continue;
-                }
+                $factories[$serviceName] = $service['factory'];
+                unset($symfonyFactory['services'][$serviceName]);
+                continue;
             }
         }
 
@@ -68,5 +36,30 @@ class FactoryTranslator
                 'factories' => $factories,
             ],
         ];
+    }
+
+    private function getFactoryWithArguments(array &$symfonyFactory, string $serviceName, $service): array
+    {
+        $config = [];
+        if (is_string($service['factory'])) {
+            $arguments = (new ArgumentTranslator())->process(
+                $symfonyFactory,
+                $service
+            );
+            unset($symfonyFactory['services'][$serviceName]);
+            $config = [$service['factory'], '__invoke', $arguments];
+        }
+        if (is_array($service['factory'])) {
+            $factory = array_shift($service['factory']);
+            $method = array_shift($service['factory']);
+            $arguments = (new ArgumentTranslator())->process(
+                $symfonyFactory,
+                $service
+            );
+            unset($symfonyFactory['services'][$serviceName]);
+            $config = [$factory, $method, $arguments];
+        }
+
+        return $config;
     }
 }

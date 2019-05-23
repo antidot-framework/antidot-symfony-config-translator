@@ -16,6 +16,13 @@ class FactoryTranslatorTest extends TestCase
     /** @var array */
     private $obtainedFactory;
 
+    public function testItShouldReturnEmptyFactoriesWhenTheyAreNotDefined(): void
+    {
+        $this->givenASymfonyStyleConfigWithoutFactories();
+        $this->whenTheFactoryIsProcessed();
+        $this->thenGivenSymfonyStyleServiceShouldNotBeModified();
+    }
+
     public function testItShouldTranslateAFactoryTypeDependencies(): void
     {
         $this->givenASymfonyStyleFactory();
@@ -129,5 +136,21 @@ class FactoryTranslatorTest extends TestCase
             ],
             'services' => [],
         ]);
+    }
+
+    private function givenASymfonyStyleConfigWithoutFactories(): void
+    {
+        $this->symfonyFactory = [
+            'services' => [
+                'some.class' => null
+            ]
+        ];
+    }
+
+    private function thenGivenSymfonyStyleServiceShouldNotBeModified(): void
+    {
+        $this->assertEquals(['dependencies' => [
+            'factories' => [],
+        ]], $this->obtainedFactory);
     }
 }

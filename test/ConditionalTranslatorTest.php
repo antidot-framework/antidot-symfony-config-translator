@@ -16,6 +16,13 @@ class ConditionalTranslatorTest extends TestCase
     /** @var array */
     private $obtainedConditional;
 
+    public function testItShouldReturnEmptyConditionalsWhenTheyAreNotDefined(): void
+    {
+        $this->givenASymfonyStyleConfigWithoutConditionals();
+        $this->whenTheServiceIsProcessed();
+        $this->thenGivenSymfonyStyleServiceShouldNotBeModified();
+    }
+
     public function testItShouldTranslateAConditionalTypeDependencies(): void
     {
         $this->givenASymfonyStyleService();
@@ -119,5 +126,21 @@ class ConditionalTranslatorTest extends TestCase
             ],
             'services' => [],
         ]);
+    }
+
+    private function givenASymfonyStyleConfigWithoutConditionals(): void
+    {
+        $this->symfonyService = [
+            'services' => [
+                'some.class' => null
+            ]
+        ];
+    }
+
+    private function thenGivenSymfonyStyleServiceShouldNotBeModified(): void
+    {
+        $this->assertEquals(['dependencies' => [
+            'conditionals' => [],
+        ]], $this->obtainedConditional);
     }
 }

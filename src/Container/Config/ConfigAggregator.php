@@ -78,11 +78,8 @@ EOT;
             (new AliasTranslator())->process($defaultConfig['services']),
             (new InvokableTranslator())->process($defaultConfig['services']),
             $defaultConfig
-        );
+        ) ?? [];
 
-        if (empty($config)) {
-            throw new RuntimeException('Error occurred merging configuration');
-        }
         return $config;
     }
 

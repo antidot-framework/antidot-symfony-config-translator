@@ -30,9 +30,7 @@ class ArgumentTranslator
         }
         $index = str_replace(['%config%', '%config.', '%'], '', $value);
         if (array_key_exists($index, $config)) {
-            return empty($index)
-                ? $config
-                : $config[$index];
+            return $config[$index];
         }
 
         return $value;

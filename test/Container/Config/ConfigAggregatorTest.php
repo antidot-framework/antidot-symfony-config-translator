@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Antidot\SymfonyConfigTranslator\Container\Config;
 
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Zend\ConfigAggregator\ArrayProvider;
 
 class ConfigAggregatorTest extends TestCase
@@ -28,6 +29,22 @@ class ConfigAggregatorTest extends TestCase
         $this->thenItShouldReturnMergedConfig();
     }
 
+    public function testItShouldCreateAndReadConfigFromCache(): void
+    {
+        $this->givenAnArrayOfSymfonyStyleConfigProvidersWithCacheEnabled();
+        $this->whenConfigIsMergedWithCache();
+        $this->thenItShouldReturnMergedConfigWithCache();
+        $this->andThenCacheFileShouldExist();
+    }
+
+    public function testItShouldNotCreateCacheConfigWhenAlreadyExistConfig(): void
+    {
+        $this->havingCacheFile();
+        $this->whenConfigIsMergedWithCache();
+        $this->thenItShouldReturnMergedConfigWithCache();
+        $this->andThenCacheFileShouldExist();
+    }
+
     private function givenAnArrayOfConfigProviders(): void
     {
         $this->providers = [
@@ -48,6 +65,12 @@ class ConfigAggregatorTest extends TestCase
         ];
     }
 
+    private function givenAnArrayOfSymfonyStyleConfigProvidersWithCacheEnabled(): void
+    {
+        $this->givenAnArrayOfConfigProviders();
+        $this->providers[] = new ArrayProvider(['config_cache_enabled' => true]);
+    }
+
     private function whenConfigIsMerged(): void
     {
         $aggregator = new ConfigAggregator($this->providers);
@@ -55,9 +78,30 @@ class ConfigAggregatorTest extends TestCase
         $this->mergedConfig = $aggregator->getMergedConfig();
     }
 
+    private function whenConfigIsMergedWithCache(): void
+    {
+        $aggregator = new ConfigAggregator($this->providers, __DIR__. '/config-cache.php');
+
+        $this->mergedConfig = $aggregator->getMergedConfig();
+    }
+
     private function thenItShouldReturnMergedConfig(): void
     {
         $this->assertEquals($this->expectedConfig(), $this->mergedConfig);
+    }
+
+    private function thenItShouldReturnMergedConfigWithCache(): void
+    {
+        $this->assertEquals(array_merge(
+            $this->expectedConfig(),
+            ['config_cache_enabled' => true]
+        ), $this->mergedConfig);
+    }
+
+    private function andThenCacheFileShouldExist(): void
+    {
+        $this->assertFileExists(__DIR__. '/config-cache.php');
+        unlink(__DIR__. '/config-cache.php');
     }
 
     private function factories(): array
@@ -227,5 +271,12 @@ class ConfigAggregatorTest extends TestCase
                 ]
             ]
         ];
+    }
+
+    private function havingCacheFile(): void
+    {
+        $this->givenAnArrayOfSymfonyStyleConfigProvidersWithCacheEnabled();
+        $this->whenConfigIsMergedWithCache();
+        $this->assertFileExists(__DIR__. '/config-cache.php');
     }
 }

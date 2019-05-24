@@ -10,7 +10,6 @@ use Antidot\SymfonyConfigTranslator\FactoryTranslator;
 use Antidot\SymfonyConfigTranslator\InvokableTranslator;
 use Antidot\SymfonyConfigTranslator\TagTranslator;
 use DateTimeImmutable;
-use RuntimeException;
 use Zend\ConfigAggregator\ConfigAggregator as BaseAggregator;
 
 use function array_replace_recursive;

@@ -34,11 +34,6 @@ $aggregator = new ConfigAggregator([
 return $aggregator->getMergedConfig();
 ````
 
-### Zend expressive
-
-````php
-````
-
 ## Dependency Injection
 
 > https://github.com/antidot-framework/antidot-symfony-config-translator

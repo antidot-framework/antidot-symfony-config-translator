@@ -10,6 +10,7 @@ use Antidot\SymfonyConfigTranslator\FactoryTranslator;
 use Antidot\SymfonyConfigTranslator\InvokableTranslator;
 use Antidot\SymfonyConfigTranslator\TagTranslator;
 use DateTimeImmutable;
+use RuntimeException;
 use Zend\ConfigAggregator\ConfigAggregator as BaseAggregator;
 
 use function array_replace_recursive;
@@ -85,6 +86,13 @@ EOT;
     private function cacheConfig(array $config, string $cachedConfigFile): void
     {
         if (true === $config['config_cache_enabled']) {
+            if ($this->canNotCreateCacheDirectory($cachedConfigFile)) {
+                throw new RuntimeException(sprintf(
+                    'Cache file "%s" was not created, because cannot create cache directory',
+                    $cachedConfigFile
+                ));
+            }
+
             file_put_contents($cachedConfigFile, sprintf(
                 self::CACHE_TEMPLATE,
                 get_class($this),
@@ -115,5 +123,20 @@ EOT;
         }
 
         return $config;
+    }
+
+    private function canNotCreateCacheDirectory(string $cachedConfigFile): bool
+    {
+        $concurrentDirectory = dirname($cachedConfigFile);
+        if (file_exists($cachedConfigFile) || is_dir($concurrentDirectory)) {
+            return false;
+        }
+
+        return !mkdir(
+            $concurrentDirectory,
+            0755,
+            true
+        )
+            && !is_dir($concurrentDirectory);
     }
 }

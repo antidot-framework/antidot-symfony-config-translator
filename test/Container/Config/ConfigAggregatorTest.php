@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Antidot\SymfonyConfigTranslator\Container\Config;
 
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 use Zend\ConfigAggregator\ArrayProvider;
 
 class ConfigAggregatorTest extends TestCase

@@ -72,12 +72,12 @@ EOT;
     private function parse(array $defaultConfig): array
     {
         $config = array_replace_recursive(
+            $defaultConfig,
             (new TagTranslator())->process($defaultConfig['services']),
             (new FactoryTranslator())->process($defaultConfig),
             (new ConditionalTranslator())->process($defaultConfig),
             (new AliasTranslator())->process($defaultConfig['services']),
-            (new InvokableTranslator())->process($defaultConfig['services']),
-            $defaultConfig
+            (new InvokableTranslator())->process($defaultConfig['services'])
         ) ?? [];
 
         return $config;

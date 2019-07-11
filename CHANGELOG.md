@@ -1,11 +1,27 @@
 # Change Log
 
+## [1.0.1](https://github.com/antidot-framework/antidot-symfony-config-translator/tree/1.0.1) (2019-07-10)
+[Full Changelog](https://github.com/antidot-framework/antidot-symfony-config-translator/compare/1.0.0...1.0.1)
+
+**Implemented enhancements:**
+
+- Add tagging support for service definition [\#7](https://github.com/antidot-framework/antidot-symfony-config-translator/issues/7)
+
+**Fixed bugs:**
+
+- issue/\#13: create cache dir if not exist [\#14](https://github.com/antidot-framework/antidot-symfony-config-translator/pull/14) ([kpicaza](https://github.com/kpicaza))
+
+**Closed issues:**
+
+- Increase coverage to 100% [\#10](https://github.com/antidot-framework/antidot-symfony-config-translator/issues/10)
+
+**Merged pull requests:**
+
+- issue/\#10: remove expressive section from docs [\#12](https://github.com/antidot-framework/antidot-symfony-config-translator/pull/12) ([kpicaza](https://github.com/kpicaza))
+
 ## [1.0.0](https://github.com/antidot-framework/antidot-symfony-config-translator/tree/1.0.0) (2019-05-24)
 **Closed issues:**
 
-[Full Changelog](https://github.com/antidot-framework/antidot-symfony-config-translator/compare/1.0.0...HEAD)
-
-- issue/\#10: remove expressive section from docs [\#12](https://github.com/antidot-framework/antidot-symfony-config-translator/pull/12) ([kpicaza](https://github.com/kpicaza))
 - Solve config cache after translation [\#5](https://github.com/antidot-framework/antidot-symfony-config-translator/issues/5)
 - Create config adapter for symfony factories [\#3](https://github.com/antidot-framework/antidot-symfony-config-translator/issues/3)
 - Document Symfony config translator [\#2](https://github.com/antidot-framework/antidot-symfony-config-translator/issues/2)

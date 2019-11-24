@@ -24,6 +24,10 @@ class ArgumentTranslator
 
     private function getArguments(array $config, $value)
     {
+        if (is_array($value)) {
+            return $value;
+        }
+
         $isService = 0 === strpos($value, '@');
         if ($isService) {
             return str_replace('@', '', $value);

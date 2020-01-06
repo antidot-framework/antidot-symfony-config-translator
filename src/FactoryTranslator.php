@@ -6,7 +6,6 @@ namespace Antidot\SymfonyConfigTranslator;
 
 use function array_key_exists;
 use function array_shift;
-use function dump;
 use function is_array;
 use function is_string;
 

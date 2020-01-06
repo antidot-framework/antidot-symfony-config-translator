@@ -6,8 +6,6 @@ namespace Antidot\SymfonyConfigTranslator;
 
 use function array_key_exists;
 use function is_array;
-use function str_replace;
-use function strpos;
 
 class ConditionalTranslator
 {

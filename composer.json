@@ -12,9 +12,9 @@
         }
     ],
     "require": {
-        "php": "^7.2.13",
-        "zendframework/zend-config": "^3.2.0",
-        "zendframework/zend-config-aggregator": "^1.1.1"
+        "php": "^7.4.0",
+        "laminas/laminas-config": "^3.2.0",
+        "laminas/laminas-config-aggregator": "^1.1.1"
     },
     "require-dev": {
         "phpro/grumphp": "^0.15.0",
@@ -46,11 +46,6 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "zf": {
-            "config-provider": "Antidot\\Logger\\Container\\Config\\ConfigProvider"
-        }
     },
     "suggest": {
         "ext-yaml": "if your config is in yaml format.",

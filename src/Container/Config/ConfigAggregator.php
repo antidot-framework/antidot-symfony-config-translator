@@ -11,7 +11,7 @@ use Antidot\SymfonyConfigTranslator\InvokableTranslator;
 use Antidot\SymfonyConfigTranslator\TagTranslator;
 use DateTimeImmutable;
 use RuntimeException;
-use Zend\ConfigAggregator\ConfigAggregator as BaseAggregator;
+use Laminas\ConfigAggregator\ConfigAggregator as BaseAggregator;
 
 use function array_replace_recursive;
 use function date;
@@ -37,7 +37,7 @@ return %s;
 
 EOT;
 
-    private $config;
+    private array $config;
 
     public function __construct(array $providers = [], $cachedConfigFile = null, array $postProcessors = [])
     {

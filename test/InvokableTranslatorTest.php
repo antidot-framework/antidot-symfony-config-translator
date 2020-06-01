@@ -42,7 +42,7 @@ class InvokableTranslatorTest extends TestCase
     {
         $this->expectedInvokable = [
             'dependencies' => [
-                'invokables' => [
+                'services' => [
                     'some.class' => 'Antidot\\SomeClass',
                     'some.other.class' => 'Antidot\\SomeOtherClass',
                     'Antidot\\SomeClassInvokable' => 'Antidot\\SomeClassInvokable',

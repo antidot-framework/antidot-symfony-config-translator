@@ -50,7 +50,8 @@ EOT;
             $this->checkCacheConfig($cachedConfigFile);
         } else {
             parent::__construct($providers, $cachedConfigFile, $postProcessors);
-            $this->config = $this->mergeConfig(parent::getMergedConfig());
+            $config = $this->parse(parent::getMergedConfig());
+            $this->config = $this->mergeConfig($config);
         }
     }
 
@@ -72,17 +73,17 @@ EOT;
     private function parse(array $defaultConfig): array
     {
         $config = array_replace_recursive(
-            $defaultConfig,
             (new TagTranslator())->process($defaultConfig['services']),
             (new FactoryTranslator())->process($defaultConfig),
             (new ConditionalTranslator())->process($defaultConfig),
+            (new InvokableTranslator())->process($defaultConfig['services']),
             (new AliasTranslator())->process($defaultConfig['services']),
-            (new InvokableTranslator())->process($defaultConfig['services'])
+            $defaultConfig
         ) ?? [];
-        $config = array_merge($config, $config['dependencies'] ?? []);
+        $config = array_replace_recursive($config, $config['dependencies'] ?? []);
         unset($config['dependencies']);
 
-        return $config;
+        return $config ?? [];
     }
 
     private function cacheConfig(array $config, string $cachedConfigFile): void
@@ -121,12 +122,7 @@ EOT;
             unset($config['parameters']);
         }
 
-        if (false === empty($config['services'])) {
-            $config = $this->parse($config);
-            unset($config['services']);
-        }
-
-        return $config;
+        return $config ?? [];
     }
 
     private function canNotCreateCacheDirectory(string $cachedConfigFile): bool
@@ -136,11 +132,7 @@ EOT;
             return false;
         }
 
-        return !mkdir(
-            $concurrentDirectory,
-            0755,
-            true
-        )
+        return !mkdir($concurrentDirectory, 0755, true)
             && !is_dir($concurrentDirectory);
     }
 }

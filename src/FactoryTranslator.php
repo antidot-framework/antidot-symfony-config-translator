@@ -21,6 +21,7 @@ class FactoryTranslator
             }
             if (array_key_exists('factory', $service) && array_key_exists('arguments', $service)) {
                 $factories[$serviceName] = $this->getFactoryWithArguments($symfonyFactory, $serviceName, $service);
+                unset($symfonyFactory['services'][$serviceName]);
                 continue;
             }
             if (array_key_exists('factory', $service)) {

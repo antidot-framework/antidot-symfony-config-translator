@@ -15,7 +15,7 @@ class ConditionalTranslator
         $conditionals = [];
 
         foreach ($symfonyService['services'] ?? [] as $name => $service) {
-            if (!is_array($service)) {
+            if (!is_array($service) || array_key_exists('factory', $service)) {
                 continue;
             }
 

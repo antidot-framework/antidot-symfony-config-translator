@@ -48,7 +48,7 @@ class AliasTranslatorTest extends TestCase
     {
         $this->expectedAlias = [
             'dependencies' => [
-                'aliases' => [
+                'services' => [
                     'some.class.alias' => 'some.class.class',
                     'other.class.alias' => 'some.other.class',
                 ],
@@ -84,7 +84,7 @@ class AliasTranslatorTest extends TestCase
     {
         $this->assertEquals([
             'dependencies' => [
-                'aliases' => []
+                'services' => []
             ]
         ], $this->obtainedAlias);
     }

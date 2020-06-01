@@ -70,7 +70,7 @@ class ConditionalTranslatorTest extends TestCase
     {
         $this->expectedConditional = [
             'dependencies' => [
-                'conditionals' => [
+                'services' => [
                     'some.class' => [
                         'class' => 'Antidot\\SomeClass',
                         'arguments' => [
@@ -139,8 +139,10 @@ class ConditionalTranslatorTest extends TestCase
 
     private function thenGivenSymfonyStyleServiceShouldNotBeModified(): void
     {
-        $this->assertEquals(['dependencies' => [
-            'conditionals' => [],
-        ]], $this->obtainedConditional);
+        $this->assertEquals([
+            'dependencies' => [
+                'services' => [],
+            ]
+        ], $this->obtainedConditional);
     }
 }

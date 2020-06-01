@@ -12,6 +12,10 @@ class InvokableTranslator
         $invokables = [];
 
         foreach ($symfonyService as $name => $service) {
+            if (is_array($service) && array_key_exists('factory', $service)) {
+                continue;
+            }
+
             if (empty($service)) {
                 $invokables[$name] = $name;
                 unset($symfonyService[$name]);

@@ -79,7 +79,7 @@ class ConfigAggregatorTest extends TestCase
 
     private function whenConfigIsMergedWithCache(): void
     {
-        $aggregator = new ConfigAggregator($this->providers, __DIR__. '/config-cache.php');
+        $aggregator = new ConfigAggregator($this->providers, __DIR__ . '/config-cache.php');
 
         $this->mergedConfig = $aggregator->getMergedConfig();
     }
@@ -99,17 +99,15 @@ class ConfigAggregatorTest extends TestCase
 
     private function andThenCacheFileShouldExist(): void
     {
-        $this->assertFileExists(__DIR__. '/config-cache.php');
-        unlink(__DIR__. '/config-cache.php');
+        $this->assertFileExists(__DIR__ . '/config-cache.php');
+        unlink(__DIR__ . '/config-cache.php');
     }
 
     private function factories(): array
     {
         return [
-            'dependencies' => [
-                'factories' => [
-                    'some.service.name' => 'Some\Factory'
-                ]
+            'factories' => [
+                'some.service.name' => 'Some\Factory'
             ],
             'some.config' => [
                 'some.key' => 'value1'
@@ -120,10 +118,8 @@ class ConfigAggregatorTest extends TestCase
     private function invokables(): array
     {
         return [
-            'dependencies' => [
-                'invokables' => [
-                    'some.invokable.name' => 'Some\Invokable'
-                ]
+            'services' => [
+                'some.invokable.name' => 'Some\Invokable'
             ],
             'some.other.config' => [
                 'some.key' => 'value1',
@@ -135,14 +131,12 @@ class ConfigAggregatorTest extends TestCase
     private function conditionals(): array
     {
         return [
-            'dependencies' => [
-                'conditionals' => [
-                    'some.class.name' => [
-                        'class' => 'Some\Class',
-                        'arguments' => [
-                            'foo' => 'bar',
-                            'baz' => 'doo',
-                        ]
+            'services' => [
+                'some.class.name' => [
+                    'class' => 'Some\Class',
+                    'arguments' => [
+                        'foo' => 'bar',
+                        'baz' => 'doo',
                     ]
                 ]
             ],
@@ -158,10 +152,8 @@ class ConfigAggregatorTest extends TestCase
     private function aliases(): array
     {
         return [
-            'dependencies' => [
-                'aliases' => [
-                    'some.alias' => 'Some\Class'
-                ]
+            'services' => [
+                'some.alias' => 'Some\Class'
             ]
         ];
     }
@@ -169,25 +161,19 @@ class ConfigAggregatorTest extends TestCase
     private function expectedConfig(): array
     {
         return [
-            'dependencies' => [
-                'conditionals' => [
-                    'some.class.name' => [
-                        'class' => 'Some\Class',
-                        'arguments' => [
-                            'foo' => 'bar',
-                            'baz' => 'doo',
-                        ]
+            'services' => [
+                'some.class.name' => [
+                    'class' => 'Some\Class',
+                    'arguments' => [
+                        'foo' => 'bar',
+                        'baz' => 'doo',
                     ]
                 ],
-                'factories' => [
-                    'some.service.name' => 'Some\Factory'
-                ],
-                'invokables' => [
-                    'some.invokable.name' => 'Some\Invokable'
-                ],
-                'aliases' => [
-                    'some.alias' => 'Some\Class'
-                ],
+                'some.invokable.name' => 'Some\Invokable',
+                'some.alias' => 'Some\Class',
+            ],
+            'factories' => [
+                'some.service.name' => 'Some\Factory'
             ],
             'some.class.config' => [
                 'some.key' => 'value1',
@@ -241,8 +227,8 @@ class ConfigAggregatorTest extends TestCase
     private function symfonyConditionals(): array
     {
         return [
-                'services' => [
-                    'some.class.name' => [
+            'services' => [
+                'some.class.name' => [
                     'class' => 'Some\Class',
                     'arguments' => [
                         '$foo' => 'bar',
@@ -276,6 +262,6 @@ class ConfigAggregatorTest extends TestCase
     {
         $this->givenAnArrayOfSymfonyStyleConfigProvidersWithCacheEnabled();
         $this->whenConfigIsMergedWithCache();
-        $this->assertFileExists(__DIR__. '/config-cache.php');
+        $this->assertFileExists(__DIR__ . '/config-cache.php');
     }
 }

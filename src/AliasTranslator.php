@@ -14,7 +14,7 @@ class AliasTranslator
         $aliases = [];
 
         foreach ($symfonyAlias as $alias => $service) {
-            if (!is_array($service)) {
+            if (!is_array($service) || array_key_exists('factory', $service)) {
                 continue;
             }
 

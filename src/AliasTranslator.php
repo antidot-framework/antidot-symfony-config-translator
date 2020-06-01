@@ -25,9 +25,7 @@ class AliasTranslator
         }
 
         return [
-            'dependencies' => [
-                'aliases' => $aliases,
-            ]
+            'services' => $aliases,
         ];
     }
 }

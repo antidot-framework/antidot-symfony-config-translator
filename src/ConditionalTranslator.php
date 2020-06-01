@@ -31,9 +31,7 @@ class ConditionalTranslator
         }
 
         return [
-            'dependencies' => [
-                'conditionals' => $conditionals
-            ]
+            'services' => $conditionals
         ];
     }
 }

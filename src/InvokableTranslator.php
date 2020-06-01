@@ -26,9 +26,7 @@ class InvokableTranslator
         }
 
         return [
-            'dependencies' => [
-                'invokables' => $invokables,
-            ]
+            'services' => $invokables,
         ];
     }
 }

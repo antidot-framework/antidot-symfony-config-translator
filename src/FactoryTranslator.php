@@ -31,9 +31,7 @@ class FactoryTranslator
         }
 
         return [
-            'dependencies' => [
-                'factories' => $factories,
-            ],
+            'factories' => $factories,
         ];
     }
 

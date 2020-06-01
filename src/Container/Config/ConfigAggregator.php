@@ -111,7 +111,9 @@ EOT;
                     (new DateTimeImmutable())->format('Y-m-d'),
                     json_encode($config['parameters']) ?: ''
                 ),
-                true
+                true,
+                16,
+                JSON_THROW_ON_ERROR
             );
             $config = array_replace_recursive($config, $config['parameters'] ?? []);
             unset($config['parameters']);

@@ -79,6 +79,8 @@ EOT;
             (new AliasTranslator())->process($defaultConfig['services']),
             (new InvokableTranslator())->process($defaultConfig['services'])
         ) ?? [];
+        $config = array_merge($config, $config['dependencies'] ?? []);
+        unset($config['dependencies']);
 
         return $config;
     }

@@ -50,8 +50,7 @@ EOT;
             $this->checkCacheConfig($cachedConfigFile);
         } else {
             parent::__construct($providers, $cachedConfigFile, $postProcessors);
-            $config = $this->parse(parent::getMergedConfig());
-            $this->config = $this->mergeConfig($config);
+            $this->config = $this->mergeConfig(parent::getMergedConfig());
         }
     }
 
@@ -122,7 +121,7 @@ EOT;
             unset($config['parameters']);
         }
 
-        return $config ?? [];
+        return $this->parse($config ?? []);
     }
 
     private function canNotCreateCacheDirectory(string $cachedConfigFile): bool

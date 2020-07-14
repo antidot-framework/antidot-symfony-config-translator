@@ -38,7 +38,7 @@ class FactoryTranslator
         ];
     }
 
-    private function getFactoryWithArguments(array &$symfonyFactory, string $serviceName, $service): array
+    private function getFactoryWithArguments(array &$symfonyFactory, string $serviceName, array $service): array
     {
         $config = [];
         if (is_string($service['factory'])) {

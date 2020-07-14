@@ -22,6 +22,11 @@ class ArgumentTranslator
         return $arguments;
     }
 
+    /**
+     * @param array<mixed> $config
+     * @param mixed $value
+     * @return array<mixed>|mixed|string|string[]
+     */
     private function getArguments(array $config, $value)
     {
         if (is_array($value)) {
@@ -32,6 +37,7 @@ class ArgumentTranslator
         if ($isService) {
             return str_replace('@', '', $value);
         }
+        /** @var int|string $index */
         $index = str_replace(['%config%', '%config.', '%'], '', $value);
         if (array_key_exists($index, $config)) {
             return $config[$index];

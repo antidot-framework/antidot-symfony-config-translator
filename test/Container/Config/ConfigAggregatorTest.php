@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Antidot\SymfonyConfigTranslator\Container\Config;
+namespace AntidotTest\SymfonyConfigTranslator\Container\Config;
 
 use PHPUnit\Framework\TestCase;
+use Antidot\SymfonyConfigTranslator\Container\Config\ConfigAggregator;
 use Zend\ConfigAggregator\ArrayProvider;
 
 class ConfigAggregatorTest extends TestCase

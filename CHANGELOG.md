@@ -1,8 +1,23 @@
 # Changelog
 
-## [1.1.1](https://github.com/antidot-framework/antidot-symfony-config-translator/tree/HEAD)
+## [1.1.2](https://github.com/antidot-framework/antidot-symfony-config-translator/tree/1.1.2) (2021-01-10)
 
-[Full Changelog](https://github.com/antidot-framework/antidot-symfony-config-translator/compare/1.1.0...HEAD)
+[Full Changelog](https://github.com/antidot-framework/antidot-symfony-config-translator/compare/1.1.1...1.1.2)
+
+**Implemented enhancements:**
+
+- add php8 support [\#25](https://github.com/antidot-framework/antidot-symfony-config-translator/pull/25) ([kpicaza](https://github.com/kpicaza))
+
+**Merged pull requests:**
+
+- Update phpro/grumphp requirement from ~0.17 to ~0.17 || ~1.0 [\#24](https://github.com/antidot-framework/antidot-symfony-config-translator/pull/24) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update phpro/grumphp requirement from ^0.15.0 || ^0.19.0 || ^0.21.0 to ~0.17 [\#23](https://github.com/antidot-framework/antidot-symfony-config-translator/pull/23) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update phpro/grumphp requirement from ^0.15.0 || ^0.19.0 to ^0.15.0 || ^0.19.0 || ^0.21.0 [\#22](https://github.com/antidot-framework/antidot-symfony-config-translator/pull/22) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix namespace for ConfigAggregatorTest class [\#21](https://github.com/antidot-framework/antidot-symfony-config-translator/pull/21) ([peter279k](https://github.com/peter279k))
+
+## [1.1.1](https://github.com/antidot-framework/antidot-symfony-config-translator/tree/1.1.1) (2020-07-14)
+
+[Full Changelog](https://github.com/antidot-framework/antidot-symfony-config-translator/compare/1.1.0...1.1.1)
 
 **Merged pull requests:**
 
